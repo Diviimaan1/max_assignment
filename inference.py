@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader
 from model import SimpleCNN
-from model import DermatologyDataset
+from dataset import DermatologyDataset
 
 def evaluate_model(model_path, test_npz_path, batch_size=64):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -37,3 +37,9 @@ def evaluate_model(model_path, test_npz_path, batch_size=64):
     acc = correct / total
     print(f"Test Accuracy: {acc:.4f}")
     return acc
+
+if __name__ == "__main__":
+    evaluate_model(
+        "models/best_model.pth",
+        "./data/candidate_dataset.npz"
+    )
